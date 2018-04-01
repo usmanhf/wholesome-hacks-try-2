@@ -1,5 +1,6 @@
-from flask import Flask, request
-app = Flask(__name__)
+import flask
+import sql
+app = flask.Flask(__name__)
 
 @app.route("/")
 def index():
@@ -7,9 +8,18 @@ def index():
 
 @app.route('/text', methods=['POST'])
 def text():
-    projectpath = request.form['projectFilepath']
-    # your code
-    # return a response
+    form_text = flask.request.form['Answer']
+    print(form_text)
+
+    # check if form_text is positive!
+    # if positive:
+    connection = sql.connect()
+    sql.add_message(form_text, connection)
+
+    # else, show error message
+    pass
+
+    return flask.redirect("/")
 
 if __name__ == "__main__":
     app.run("localhost", port=80, debug=True)
