@@ -1,6 +1,8 @@
 import flask
-import azure.cognitiveservices.language.textanalytics as textanalytics
-from azure.common.credentials import ServicePrincipalCredentials
+import requests
+#import azure.cognitiveservices.language.textanalytics as textanalytics
+#from azure.cognitiveservices.language.textanalytics.models.multi_language_input import MultiLanguageInput
+#from azure.common.credentials import ServicePrincipalCredentials
 import sql
 
 app = flask.Flask(__name__)
@@ -8,10 +10,9 @@ app = flask.Flask(__name__)
 @app.route("/")
 def index():
     connection = sql.connect()
-    hi = sql.get_entries(connection)
-    print(hi)
+    all_responses = sql.get_entries(connection)
     bye = []
-    for item in hi:
+    for item in all_responses:
         bye.append(item["text"])
     
     return flask.render_template('wholesome-webpage.html', data=bye)
@@ -22,17 +23,30 @@ def text():
     print(form_text)
 
     # check if form_text is positive!
-    credentials = ServicePrincipalCredentials(
-        client_id="",
-        tenant="",
-        secret="")
-    textanalytics.text_analytics_api.TextAnalyticsAPI("westus2", credentials)
-    # if positive:
-    connection = sql.connect()
-    sql.add_message(form_text, connection)
+    # credentials = ServicePrincipalCredentials(
+    #     client_id="d6b9afd5-d31d-40ec-81f1-37f26b03a8c8",
+    #     tenant="6a4f970e-1df2-47ad-b73e-00569a33b596",
+    #     secret="wholesome")
+    # textanalyticsapi = textanalytics.text_analytics_api.TextAnalyticsAPI("westus2", credentials)
+    # document = MultiLanguageInput(language="en", id="0", text=form_text)
+    # sentiment_number = textanalyticsapi.sentiment(documents=[document])
+    # print(sentiment_number)
 
-    # else, show error message
-    pass
+    documents = {'documents': [
+        {'id': '1', 'text': form_text, 'language': 'en'}
+    ]}
+    headers   = {"Ocp-Apim-Subscription-Key": "c8c9ef450ffa4cfd860651eae28fe6ff"}
+    response  = requests.post("https://westus2.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment",
+                              headers=headers,
+                              json=documents)
+    sentiments = response.json()
+
+    if sentiments['documents'][0]['score'] >= 0.5: # if positive message
+        connection = sql.connect()
+        sql.add_message(form_text, connection)
+
+    else:
+        return "Positive messages only, please!"
 
     return flask.redirect("/")
 
