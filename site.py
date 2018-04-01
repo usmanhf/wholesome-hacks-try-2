@@ -6,9 +6,10 @@ app = flask.Flask(__name__)
 def index():
     connection = sql.connect()
     hi = sql.get_entries(connection)
+    print(hi)
     bye = []
     for item in hi:
-        bye.append(item[text])
+        bye.append(item["text"])
     
     return flask.render_template('wholesome-webpage.html', data=bye)
 
