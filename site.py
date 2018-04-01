@@ -4,6 +4,9 @@ app = flask.Flask(__name__)
 
 @app.route("/")
 def index():
+    connection = sql.connect()
+    hi = sql.get_entries(connection)
+    print(hi)
     return app.send_static_file('wholesome-webpage.html')
 
 @app.route('/text', methods=['POST'])
@@ -22,4 +25,4 @@ def text():
     return flask.redirect("/")
 
 if __name__ == "__main__":
-    app.run("localhost", port=80, debug=True)
+    app.run("0.0.0.0", port=80, debug=True)
