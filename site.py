@@ -35,7 +35,7 @@ def text():
     documents = {'documents': [
         {'id': '1', 'text': form_text, 'language': 'en'}
     ]}
-    headers   = {"Ocp-Apim-Subscription-Key": "c8c9ef450ffa4cfd860651eae28fe6ff"}
+    headers   = {"Ocp-Apim-Subscription-Key": ""}
     response  = requests.post("https://westus2.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment",
                               headers=headers,
                               json=documents)
