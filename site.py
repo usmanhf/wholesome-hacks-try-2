@@ -1,5 +1,8 @@
 import flask
+import azure.cognitiveservices.language.textanalytics as textanalytics
+from azure.common.credentials import ServicePrincipalCredentials
 import sql
+
 app = flask.Flask(__name__)
 
 @app.route("/")
@@ -19,6 +22,11 @@ def text():
     print(form_text)
 
     # check if form_text is positive!
+    credentials = ServicePrincipalCredentials(
+        client_id="",
+        tenant="",
+        secret="")
+    textanalytics.text_analytics_api.TextAnalyticsAPI("westus2", credentials)
     # if positive:
     connection = sql.connect()
     sql.add_message(form_text, connection)
