@@ -22,11 +22,13 @@
         <input align="center" type= "text" name="Answer"><br>
         <input align="center" type="submit" value="Submit">
     </form>
+    <div style="font-family: 'Merriweather', san-serif;">
     {% for item in data %}
-    <tr style="font-family: 'Merriweather', san-serif;">
-        <td style="font-family: 'Merriweather', san-serif;">{{item}}<br></td>
+    <tr>
+        <td>{{item}}<br></td>
     </tr>
     {% endfor %}
+    </div>
 </center>
 
 </body>
