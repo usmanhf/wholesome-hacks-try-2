@@ -41,7 +41,7 @@ def text():
                               json=documents)
     sentiments = response.json()
 
-    if sentiments['documents'][0]['score'] >= 0.5: # if positive message
+    if sentiments['documents'][0]['score'] >= 0.67 # if positive message
         connection = sql.connect()
         sql.add_message(form_text, connection)
 
