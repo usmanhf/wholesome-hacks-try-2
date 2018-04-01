@@ -24,9 +24,9 @@ def text():
 
     # check if form_text is positive!
     # credentials = ServicePrincipalCredentials(
-    #     client_id="d6b9afd5-d31d-40ec-81f1-37f26b03a8c8",
-    #     tenant="6a4f970e-1df2-47ad-b73e-00569a33b596",
-    #     secret="wholesome")
+    #     client_id="",
+    #     tenant="",
+    #     secret="")
     # textanalyticsapi = textanalytics.text_analytics_api.TextAnalyticsAPI("westus2", credentials)
     # document = MultiLanguageInput(language="en", id="0", text=form_text)
     # sentiment_number = textanalyticsapi.sentiment(documents=[document])
