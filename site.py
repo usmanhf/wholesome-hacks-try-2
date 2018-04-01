@@ -6,8 +6,8 @@ app = flask.Flask(__name__)
 def index():
     connection = sql.connect()
     hi = sql.get_entries(connection)
-    flask.render_template('wholesome-webpage.html', data=hi)
-    return app.send_static_file('wholesome-webpage.html')
+    
+    return flask.render_template('wholesome-webpage.html', data=hi)
 
 @app.route('/text', methods=['POST'])
 def text():
