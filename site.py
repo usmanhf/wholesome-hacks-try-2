@@ -40,6 +40,7 @@ def text():
                               headers=headers,
                               json=documents)
     sentiments = response.json()
+    print(sentiments['documents'][0]['score'])
 
     if sentiments['documents'][0]['score'] >= 0.67: # if positive message
         connection = sql.connect()
