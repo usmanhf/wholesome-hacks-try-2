@@ -2,11 +2,12 @@
 <html>
 
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
     <style>
         input[type=text]{
             width  : 450px;
             height : 50px;
+            border-radius:5px;
         }
     </style>
 	<title> Wholesome Website </title>
@@ -15,7 +16,7 @@
 <body style="background-color:lightblue;">
 
 <center>
-    <h1 align = "center" style="font-family: 'Raleway', sans-serif;">What are you thankful for?</h1>
+    <h1 align = "center" style="font-family: 'Merriweather', sans-serif;">What are you thankful for?</h1>
     
     <form action="text" method="post">
         <input align="center" type= "text" name="Answer"><br>
@@ -23,7 +24,7 @@
     </form>
     {% for item in data %}
     <tr>
-        <td>{{item}}<br></td>
+        <td style="font-family: 'Merriweather', san-serif;">{{item}}<br></td>
     </tr>
     {% endfor %}
 </center>
