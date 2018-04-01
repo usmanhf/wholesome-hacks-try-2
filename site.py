@@ -6,8 +6,11 @@ app = flask.Flask(__name__)
 def index():
     connection = sql.connect()
     hi = sql.get_entries(connection)
+    bye = []
+    for item in hi:
+        bye.append(item[text])
     
-    return flask.render_template('wholesome-webpage.html', data=hi)
+    return flask.render_template('wholesome-webpage.html', data=bye)
 
 @app.route('/text', methods=['POST'])
 def text():
