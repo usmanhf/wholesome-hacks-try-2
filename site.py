@@ -46,7 +46,7 @@ def text():
         sql.add_message(form_text, connection)
 
     else:
-        return flask.render_template('wholesome-webpage.html', data=["Positive messages only, please!"])
+        return "Positive messages only, please!"
 
     return flask.redirect("/")
 
